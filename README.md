@@ -89,3 +89,33 @@ func MyPrepend() {
 }
 
 ```
+
+###Args for ffmpeg
+```json
+Aspect                    -aspect
+VideoCodec                -vcodec
+FrameRate                 -r
+Resolution                -s
+VideoBitrate              -b:v
+AudioCodec                -acodec
+AudioBitrate              -b:a
+AudioSampleRate           -ar
+AudioChannels             -ac
+VideoMaxBitrate           -maxrate
+VideoMinBitrate           -minrate
+BufferSize                -bufsize
+VideoBitrateTolerance     -bt
+Threads                   -threads
+Target                    -target
+Duration                  -t
+VideoPreset               -vpre
+AudioPreset               -apre
+FilePreset                -fpre
+KeyframeInterval          -g
+SeekTime                  -ss
+Quality                   -q:v
+Vframes                   -vframes
+X264Vprofile              -vprofile
+X264VPreset               -preset
+Watermark                 -i
+```
