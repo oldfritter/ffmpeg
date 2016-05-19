@@ -33,10 +33,10 @@ import (
 )
 
 func MyTranscoder() {
-	path_str, _ := filepath.Abs("../movies/awesome_widescreen.mov")
+	path_str, _ := filepath.Abs("movies/awesome_widescreen.mov")
 	movie := ffmpeg.Movie{}
 	movie.Initialize(&path_str)
-	out_path_str, _ := filepath.Abs("../movies/output/awesome_widescreen.mp4")
+	out_path_str, _ := filepath.Abs("movies/output/awesome_widescreen.mp4")
 	transcoder := ffmpeg.Transcoder{Movie: movie, OutputFile: out_path_str, RawOption: ffmpeg.EncodingOption{VideoCodec: "h264"}}
 	transcoder.Run()
 	fmt.Println(transcoder.Movie)
@@ -55,11 +55,11 @@ import (
 )
 
 func MyAppend() {
-	path_str, _ := filepath.Abs("../movies/1.mp4")
-	advert_path_str, _ := filepath.Abs("../movies/awesome_widescreen.mov")
+	path_str, _ := filepath.Abs("movies/1.mp4")
+	advert_path_str, _ := filepath.Abs("movies/awesome_widescreen.mov")
 	movie := ffmpeg.Movie{}
 	movie.Initialize(&path_str)
-	out_path_str, _ := filepath.Abs("../movies/output/awesome_widescreen_1.mp4")
+	out_path_str, _ := filepath.Abs("movies/output/awesome_widescreen_1.mp4")
 	transcoder := ffmpeg.Transcoder{}
 	transcoder.Initialize(&movie, &out_path_str, &ffmpeg.EncodingOption{VideoCodec: "h264", AppendMovie: advert_path_str}, &ffmpeg.TranscoderOption{})
 	transcoder.Append()
@@ -78,11 +78,11 @@ import (
 )
 
 func MyPrepend() {
-	path_str, _ := filepath.Abs("../movies/1.mp4")
-	advert_path_str, _ := filepath.Abs("../movies/awesome_widescreen.mov")
+	path_str, _ := filepath.Abs("movies/1.mp4")
+	advert_path_str, _ := filepath.Abs("movies/awesome_widescreen.mov")
 	movie := ffmpeg.Movie{}
 	movie.Initialize(&path_str)
-	out_path_str, _ := filepath.Abs("../movies/output/awesome_widescreen_2.mp4")
+	out_path_str, _ := filepath.Abs("movies/output/awesome_widescreen_2.mp4")
 	transcoder := ffmpeg.Transcoder{}
 	transcoder.Initialize(&movie, &out_path_str, &ffmpeg.EncodingOption{VideoCodec: "h264", AppendMovie: advert_path_str}, &ffmpeg.TranscoderOption{})
 	transcoder.Prepend()
