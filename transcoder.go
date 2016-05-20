@@ -3,10 +3,14 @@ package ffmpeg
 import (
 	"fmt"
 	"math"
-	"strings"
+	"os"
+	// "strings"
 )
 
+var transcodingQuery map[int]Transcoder
+
 type Transcoder struct {
+	Process          *os.Process
 	Movie            Movie
 	AppendMovie      Movie
 	OutputFile       string
@@ -35,9 +39,10 @@ func (this *Transcoder) Append() {
 	fmt.Println(ffmpegBinary)
 	this.transcode(&this.AppendMovie.Path, &this.AppendMovie.TsPath)
 	command := fmt.Sprintf("%s -y -i \"concat:%s|%s\" %s %s", ffmpegBinary, this.Movie.TsPath, this.AppendMovie.TsPath, this.RawOption.ToString(), this.OutputFile)
-	fmt.Println(strings.Replace(system(command), "\n", "", -1))
-	system("rm -rf " + this.Movie.TsPath)
-	system("rm -rf " + this.AppendMovie.TsPath)
+	systemWithoutReturn(this, command)
+	// fmt.Println(strings.Replace(system(command), "\n", "", -1))
+	systemWithoutReturn(this, "rm -rf "+this.Movie.TsPath)
+	systemWithoutReturn(this, "rm -rf "+this.AppendMovie.TsPath)
 }
 
 func (this *Transcoder) Prepend() {
@@ -46,9 +51,10 @@ func (this *Transcoder) Prepend() {
 	fmt.Println(ffmpegBinary)
 	this.transcode(&this.AppendMovie.Path, &this.AppendMovie.TsPath)
 	command := fmt.Sprintf("%s -y -i \"concat:%s|%s\" %s %s", ffmpegBinary, this.AppendMovie.TsPath, this.Movie.TsPath, this.RawOption.ToString(), this.OutputFile)
-	fmt.Println(strings.Replace(system(command), "\n", "", -1))
-	system("rm -rf " + this.Movie.TsPath)
-	system("rm -rf " + this.AppendMovie.TsPath)
+	systemWithoutReturn(this, command)
+	// fmt.Println(strings.Replace(system(command), "\n", "", -1))
+	systemWithoutReturn(this, "rm -rf "+this.Movie.TsPath)
+	systemWithoutReturn(this, "rm -rf "+this.AppendMovie.TsPath)
 }
 
 func (this *Transcoder) applyTranscoderOption() {
@@ -68,11 +74,13 @@ func (this *Transcoder) applyTranscoderOption() {
 func (this *Transcoder) transcode(inputFile *string, outputFile *string) {
 	ffmpegBinary := FfmpegBinary()
 	command := fmt.Sprintf("%s -y -i %s %s %s ", ffmpegBinary, *inputFile, this.RawOption.ToString(), *outputFile)
-	strings.Replace(system(command), "\n", "", -1)
+	systemWithoutReturn(this, command)
+	// strings.Replace(system(command), "\n", "", -1)
 }
 
 func (this *Transcoder) transcodeMovie() {
 	ffmpegBinary := FfmpegBinary()
 	command := fmt.Sprintf("%s -y -i %s %s %s", ffmpegBinary, this.Movie.Path, this.RawOption.ToString(), this.OutputFile)
-	strings.Replace(system(command), "\n", "", -1)
+	systemWithoutReturn(this, command)
+	// strings.Replace(system(command), "\n", "", -1)
 }
