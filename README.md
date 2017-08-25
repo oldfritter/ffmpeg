@@ -1,7 +1,7 @@
 # FFMPEG
 A simple package for using FFMPEG
 
-##Open a video file
+## Open a video file
 ```go
 package mypackage
 
@@ -22,7 +22,7 @@ func MyMovie() {
 }
 ```
 
-##Transcode a video file
+## Transcode a video file
 ```go
 package mypackage
 
@@ -44,7 +44,7 @@ func MyTranscoder() {
 
 ```
 
-##Append a video file to another
+## Append a video file to another
 ```go
 package mypackage
 
@@ -67,7 +67,7 @@ func MyAppend() {
 
 ```
 
-##Prepend a video file to another
+## Prepend a video file to another
 ```go
 package mypackage
 
@@ -90,7 +90,7 @@ func MyPrepend() {
 
 ```
 
-###Args for ffmpeg
+### Args for ffmpeg
 ```json
 Aspect                    -aspect
 VideoCodec                -vcodec
