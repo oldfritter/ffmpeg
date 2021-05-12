@@ -64,10 +64,10 @@ func (this *Transcoder) applyTranscoderOption() {
 	}
 	if this.TranscoderOption.PreserveAspectRatio == "width" {
 		newHeight := math.Ceil(float64(this.RawOption.Width()) / this.Movie.calculatedAspectRatio())
-		this.RawOption.Resolution = fmt.Sprintf("%dx%d", this.RawOption.Width(), newHeight)
+		this.RawOption.Resolution = fmt.Sprintf("%vx%v", this.RawOption.Width(), newHeight)
 	} else if this.TranscoderOption.PreserveAspectRatio == "height" {
 		newWidth := math.Ceil(float64(this.RawOption.Height()) / this.Movie.calculatedAspectRatio())
-		this.RawOption.Resolution = fmt.Sprintf("%dx%d", newWidth, this.RawOption.Height())
+		this.RawOption.Resolution = fmt.Sprintf("%vx%v", newWidth, this.RawOption.Height())
 	}
 }
 
